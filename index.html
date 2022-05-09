@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Front end Challenge</title>
+    <link rel="stylesheet" href="./resources/stylesheets/main-style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Fun With AI - Front end Challenge</h1>
+    <label for="prompt">Enter Prompt</label>
+    <textarea name="user-prompt" id="prompt" cols="30" rows="10"></textarea>
+    <script>
+        document.write(process.env.OPENAI_SECRET)
+    </script>
+</div>
+</body>
+</html>
