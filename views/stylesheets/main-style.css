@@ -1,0 +1,15 @@
+*,*:before,*:after{
+    box-sizing: border-box;
+}
+
+.container{
+    padding: 5% 10%;
+}
+
+label, button{
+    display: block;
+}
+
+textarea{
+    resize: none;
+}

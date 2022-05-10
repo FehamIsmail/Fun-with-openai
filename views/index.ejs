@@ -3,15 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Front end Challenge</title>
-    <link rel="stylesheet" href="./resources/stylesheets/main-style.css" type="text/css">
-    <script src="index.mjs"></script>
+<!--    <link rel="stylesheet" href="./views/stylesheets/main-style.css" type="text/css">-->
+<!--    <script src="index.mjs"></script>-->
 </head>
 <body>
 <div class="container">
     <h1>Fun With AI - Front end Challenge</h1>
+    <form action="" method="POST">
     <label for="prompt">Enter Prompt</label>
-    <textarea name="user-prompt" id="prompt" cols="30" rows="10"></textarea>
-    <button type="submit" onclick="getResponse(document.getElementById('prompt').value)">Submit</button>
+    <textarea name="input" id="prompt" cols="30" rows="10"></textarea>
+    <input type="submit" value="submit" name="submit">
+    </form>
+    <%=typeof answer != 'undefined' ? answer : 'DEFAULT'%>
 </div>
 </body>
+<script>
+    function insertResponse(answer){
+        window.localStorage
+    }
+</script>
 </html>
