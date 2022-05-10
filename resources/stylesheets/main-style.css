@@ -6,7 +6,7 @@
     padding: 5% 10%;
 }
 
-label{
+label, button{
     display: block;
 }
 
