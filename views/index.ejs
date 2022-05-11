@@ -14,12 +14,25 @@
     <textarea name="input" id="prompt" cols="30" rows="10"></textarea>
     <input type="submit" value="submit" name="submit">
     </form>
-    <%=typeof answer != 'undefined' ? answer : 'DEFAULT'%>
+
+    <% if(typeof answerJSON != 'undefined') { %>
+        <script>
+            let answerJSON = <%- JSON.stringify(answerJSON) %>
+            window.localStorage.setItem(window.localStorage.length.toString(), JSON.stringify(answerJSON));
+        </script>
+    <% }//End if statement %>
+    <script>
+        for(let i = 0;i<localStorage.length;i++){
+            let prompt = JSON.parse(window.localStorage.getItem(i.toString()))['prompt']
+            let response = JSON.parse(window.localStorage.getItem(i.toString()))['answer']
+            document.write('<h2>Prompt: '+prompt+'</h2>')
+            document.write('<h2>Answer: '+response+'</h2>')
+        }
+    </script>
+
 </div>
 </body>
 <script>
-    function insertResponse(answer){
-        window.localStorage
-    }
+
 </script>
 </html>

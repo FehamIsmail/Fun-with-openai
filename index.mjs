@@ -34,8 +34,9 @@ app.post('/', (request, response) => {
     }).then(res => res.json()).then(json => {
         let output = json['choices'][0]['text']
         let result = output.replaceAll(/^[\r\n]/gm, '')
+        let answerJSON = {'prompt':request.body.input, 'response':result}
         console.log('Result: ' + result)
-        response.render('index', {answer: result});
+        response.render('index', {answerJSON: answerJSON});
     });
 });
 
