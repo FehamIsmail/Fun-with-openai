@@ -3,36 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Front end Challenge</title>
-<!--    <link rel="stylesheet" href="./views/stylesheets/main-style.css" type="text/css">-->
-<!--    <script src="index.mjs"></script>-->
+    <link rel="stylesheet" href="/css/styles.css" type="text/css">
+    <meta name ="viewport" content="initial-scale=1">
+<!--    <script src="server.mjs"></script>-->
 </head>
 <body>
 <div class="container">
-    <h1>Fun With AI - Front end Challenge</h1>
-    <form action="" method="POST">
-    <label for="prompt">Enter Prompt</label>
-    <textarea name="input" id="prompt" cols="30" rows="10"></textarea>
-    <input type="submit" value="submit" name="submit">
-    </form>
-
-    <% if(typeof answerJSON != 'undefined') { %>
-        <script>
-            let answerJSON = <%- JSON.stringify(answerJSON) %>
-            window.localStorage.setItem(window.localStorage.length.toString(), JSON.stringify(answerJSON));
-        </script>
-    <% }//End if statement %>
-    <script>
-        for(let i = 0;i<localStorage.length;i++){
-            let prompt = JSON.parse(window.localStorage.getItem(i.toString()))['prompt']
-            let response = JSON.parse(window.localStorage.getItem(i.toString()))['answer']
-            document.write('<h2>Prompt: '+prompt+'</h2>')
-            document.write('<h2>Answer: '+response+'</h2>')
-        }
-    </script>
-
+    <div class="content">
+        <h1>Fun With AI - Front end Challenge</h1>
+        <form action="" method="POST">
+            <label for="prompt">Enter Prompt</label>
+            <textarea name="input" id="prompt" cols="30" rows="10"></textarea>
+            <input id="submit-button" type="submit" value="Submit!" name="submit">
+        </form>
+        <h2 id="list-header">Responses</h2>
+    <!--   Checks if a new response has been sent from the server-->
+        <% if(typeof answerJSON != 'undefined') { %>
+            <script>
+                //Adds the new response to the user's local storage
+                let answerJSON = <%- JSON.stringify(answerJSON) %>
+                window.localStorage.setItem(window.localStorage.length.toString(), JSON.stringify(answerJSON));
+            </script>
+        <% }//End if statement %>
+        <ul class="response-list">
+            <script>
+                //Loop through every response stored in user's local storage then prints each one of them.
+                for(let i = 0;i<localStorage.length;i++){
+                    let prompt = JSON.parse(window.localStorage.getItem(i.toString()))['prompt']
+                    let response = JSON.parse(window.localStorage.getItem(i.toString()))['response']
+                    document.write('<li class="response">')
+                    document.write('    <div class="response-element">')
+                    document.write('        <div class="response-header">Prompt:</div>')
+                    document.write('        <div class="response-text">'+prompt+'</div>')
+                    document.write('    </div>')
+                    document.write('    <div class="response-element">')
+                    document.write('        <div class="response-header">Response:</div>')
+                    document.write('        <div class="response-text">'+response+'</div>')
+                    document.write('    </div>')
+                    document.write('</li>')
+                }
+            </script>
+        </ul>
+    </div>
+    <span><br>Powered by OpenAI. Engine: text-curie-001, completions mode.</span>
 </div>
 </body>
 <script>
-
+    //Avoids sending POST request on refresh
+    if(window.history.replaceState){
+        window.history.replaceState(null, null, window.location.href);
+    }
 </script>
 </html>

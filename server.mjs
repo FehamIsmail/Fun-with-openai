@@ -1,13 +1,19 @@
-import fetch from "cross-fetch";
-import { createRequire } from 'module'
 const require = createRequire(import.meta.url);
 require('dotenv').config()
+import fetch from "cross-fetch";
+import { createRequire } from 'module'
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const port = 5000
 const express = require('express')
 const app = express()
 const API_KEY = process.env.OPENAI_SECRET
 
-app.listen(5000)
+
+app.listen(port, ()=>{ console.log(`Running server on port ${port}`)})
 app.set('view engine', 'ejs')
+app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended:true}));
 
 app.get('/', (request, response) => {
@@ -16,7 +22,6 @@ app.get('/', (request, response) => {
 
 app.post('/', (request, response) => {
     const data = {
-        // prompt: request.params.input,
         prompt: request.body.input,
         temperature: 0.5,
         max_tokens: 64,
@@ -33,10 +38,11 @@ app.post('/', (request, response) => {
         body: JSON.stringify(data),
     }).then(res => res.json()).then(json => {
         let output = json['choices'][0]['text']
-        let result = output.replaceAll(/^[\r\n]/gm, '')
+        let result = output.replaceAll(/^[,\r\n]/gm, ' ')
         let answerJSON = {'prompt':request.body.input, 'response':result}
-        console.log('Result: ' + result)
         response.render('index', {answerJSON: answerJSON});
     });
+    // let answerJSON = {'prompt':request.body.input, 'response':"Result example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example..." }
+    // response.render('index', {answerJSON: answerJSON});
 });
 
