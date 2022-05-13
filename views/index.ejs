@@ -5,15 +5,14 @@
     <title>Front end Challenge</title>
     <link rel="stylesheet" href="/css/styles.css" type="text/css">
     <meta name ="viewport" content="initial-scale=1">
-<!--    <script src="server.mjs"></script>-->
 </head>
 <body>
 <div class="container">
     <div class="content">
         <h1>Fun With AI - Front end Challenge</h1>
         <form action="" method="POST">
-            <label for="prompt">Enter Prompt</label>
-            <textarea name="input" id="prompt" cols="30" rows="10"></textarea>
+            <label for="user-prompt">Enter Prompt</label>
+            <textarea name="input" id="user-prompt" cols="30" rows="10"></textarea>
             <input id="submit-button" type="submit" value="Submit!" name="submit">
         </form>
         <h2 id="list-header">Responses</h2>
@@ -29,8 +28,8 @@
             <script>
                 //Loop through every response stored in user's local storage then prints each one of them.
                 for(let i = 0;i<localStorage.length;i++){
-                    let prompt = JSON.parse(window.localStorage.getItem(i.toString()))['prompt']
-                    let response = JSON.parse(window.localStorage.getItem(i.toString()))['response']
+                    let prompt = JSON.parse(window.localStorage.getItem((localStorage.length-i-1).toString()))['prompt']
+                    let response = JSON.parse(window.localStorage.getItem((localStorage.length-i-1).toString()))['response']
                     document.write('<li class="response">')
                     document.write('    <div class="response-element">')
                     document.write('        <div class="response-header">Prompt:</div>')
@@ -44,14 +43,32 @@
                 }
             </script>
         </ul>
+        <button id='reset-button'>Clear</button>
     </div>
-    <span><br>Powered by OpenAI. Engine: text-curie-001, completions mode.</span>
+    <span>Powered by OpenAI. engine: text-curie-001, completions mode.</span>
 </div>
 </body>
 <script>
+    const textarea = document.getElementById("user-prompt");
+    const btn = document.getElementById("submit-button");
+
+    //Disables button when text area is empty
+    function disableButtonOnEmpty(){
+        btn.disabled = textarea.value === "";
+    }
+
+    //Sets the event handler
+    textarea.addEventListener("input", () => {
+        disableButtonOnEmpty();
+    });
+
+    //Disables button by default
+    disableButtonOnEmpty();
+
     //Avoids sending POST request on refresh
     if(window.history.replaceState){
         window.history.replaceState(null, null, window.location.href);
     }
+
 </script>
 </html>
