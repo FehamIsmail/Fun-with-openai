@@ -37,6 +37,7 @@ app.post('/', (request, response) => {
         },
         body: JSON.stringify(data),
     }).then(res => res.json()).then(json => {
+        console.log(json)
         let output = json['choices'][0]['text']
         let result = output.replaceAll(/^[,\r\n]/gm, ' ')
         let answerJSON = {'engine':request.body.engine,'prompt':request.body.input, 'response':result}
