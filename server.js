@@ -5,7 +5,7 @@ import { createRequire } from 'module'
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const port = 5000
+const port = process.env.port || 5000
 const express = require('express')
 const app = express()
 const API_KEY = process.env.OPENAI_SECRET
@@ -29,7 +29,7 @@ app.post('/', (request, response) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     };
-    fetch("https://api.openai.com/v1/engines/text-curie-001/completions", {
+    fetch("https://api.openai.com/v1/engines/"+request.body.engine+"/completions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ app.post('/', (request, response) => {
     }).then(res => res.json()).then(json => {
         let output = json['choices'][0]['text']
         let result = output.replaceAll(/^[,\r\n]/gm, ' ')
-        let answerJSON = {'prompt':request.body.input, 'response':result}
+        let answerJSON = {'engine':request.body.engine,'prompt':request.body.input, 'response':result}
         response.render('index', {answerJSON: answerJSON});
     });
     // let answerJSON = {'prompt':request.body.input, 'response':"Result example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example..." }

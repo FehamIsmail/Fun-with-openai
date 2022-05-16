@@ -7,10 +7,17 @@
     <meta name ="viewport" content="initial-scale=1">
 </head>
 <body>
+<div class="bg-img"></div>
 <div class="container">
     <div class="content">
         <h1>Fun With AI - Front end Challenge</h1>
         <form action="" method="POST">
+            <label for="engine">Choose an engine:</label>
+            <select name="engine">
+                <option value="text-ada-001">text-ada-001</option>
+                <option value="text-curie-001">text-curie-001</option>
+                <option value="text-babbage-001">text-babbage-001</option>
+            </select>
             <label for="user-prompt">Enter Prompt</label>
             <textarea name="input" id="user-prompt" cols="30" rows="10"></textarea>
             <input id="submit-button" type="submit" value="Submit!" name="submit">
@@ -28,9 +35,14 @@
             <script>
                 //Loop through every response stored in user's local storage then prints each one of them.
                 for(let i = 0;i<localStorage.length;i++){
+                    let engine = JSON.parse(window.localStorage.getItem((localStorage.length-i-1).toString()))['engine']
                     let prompt = JSON.parse(window.localStorage.getItem((localStorage.length-i-1).toString()))['prompt']
                     let response = JSON.parse(window.localStorage.getItem((localStorage.length-i-1).toString()))['response']
                     document.write('<li class="response">')
+                    document.write('    <div class="response-element">')
+                    document.write('        <div class="response-header">Engine:</div>')
+                    document.write('        <div class="response-text">'+engine+'</div>')
+                    document.write('    </div>')
                     document.write('    <div class="response-element">')
                     document.write('        <div class="response-header">Prompt:</div>')
                     document.write('        <div class="response-text">'+prompt+'</div>')
@@ -43,7 +55,7 @@
                 }
             </script>
         </ul>
-        <button id='reset-button'>Clear</button>
+        <button id='clear-button' onclick="clearLocalStorage()">Clear</button>
     </div>
     <span>Powered by OpenAI. engine: text-curie-001, completions mode.</span>
 </div>
@@ -51,7 +63,7 @@
 <script>
     const textarea = document.getElementById("user-prompt");
     const btn = document.getElementById("submit-button");
-
+    document.getElementById('clear-button').disabled = window.localStorage.length === 0;
     //Disables button when text area is empty
     function disableButtonOnEmpty(){
         btn.disabled = textarea.value === "";
@@ -61,6 +73,12 @@
     textarea.addEventListener("input", () => {
         disableButtonOnEmpty();
     });
+
+    //Clears the localStorage
+    function clearLocalStorage(){
+        window.localStorage.clear();
+        location.reload();
+    }
 
     //Disables button by default
     disableButtonOnEmpty();
