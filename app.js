@@ -11,6 +11,8 @@ const app = express()
 const API_KEY = process.env.OPENAI_SECRET
 
 
+
+
 app.listen(port, ()=>{ console.log(`Running server on port ${port}`)})
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'));
@@ -21,6 +23,7 @@ app.get('/', (request, response) => {
 })
 
 app.post('/', (request, response) => {
+    console.log(process.env)
     const data = {
         prompt: request.body.input,
         temperature: 0.5,
