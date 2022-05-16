@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon app.js"
   },
   "keywords": [],
   "author": "Ismail Feham",

@@ -5,7 +5,7 @@ import { createRequire } from 'module'
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const port = process.env.port || 5000
+const port = 8080
 const express = require('express')
 const app = express()
 const API_KEY = process.env.OPENAI_SECRET
