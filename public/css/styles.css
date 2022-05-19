@@ -34,7 +34,7 @@ body{
     padding: 50px;
     margin-bottom: 10px;
     border-radius: 20px;
-    border: #e9f1ff 5px solid;
+    border: #fff9e9 5px solid;
     background: url("/images/background.png") no-repeat center center fixed;
     background-size: cover;
     box-shadow: rgba(2, 2, 2, 0.15) 0 0 10px 2px;
@@ -61,7 +61,7 @@ textarea{
     padding: 10px;
     border-radius: 8px;
     border-color: transparent;
-    background-color: #e5eeff;
+    background-color: #fffcf8;
     box-shadow: rgba(87, 87, 87, 0.22) 0 0 10px 1px;
     font-size: 1.2rem;
     resize: none;
