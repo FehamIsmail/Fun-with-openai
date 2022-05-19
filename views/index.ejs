@@ -57,14 +57,16 @@
         </ul>
         <button id='clear-button' onclick="clearLocalStorage()">Clear</button>
     </div>
-    <span>Powered by OpenAI. engine: text-curie-001, completions mode.</span>
+    <span>Powered by OpenAI, completions mode. Website made by: Ismail Feham</span>
 </div>
 </body>
 <script>
     const textarea = document.getElementById("user-prompt");
     const btn = document.getElementById("submit-button");
-    document.getElementById('clear-button').disabled = window.localStorage.length === 0;
+
     //Disables button when text area is empty
+    document.getElementById('clear-button').disabled = window.localStorage.length === 0;
+
     function disableButtonOnEmpty(){
         btn.disabled = textarea.value === "";
     }

@@ -1,3 +1,4 @@
+//Importing required dependencies
 const require = createRequire(import.meta.url);
 require('dotenv').config()
 import fetch from "cross-fetch";
@@ -10,20 +11,22 @@ const express = require('express')
 const app = express()
 const API_KEY = process.env.OPENAI_SECRET
 
-
-
-
+//Opening the server
 app.listen(port, ()=>{ console.log(`Running server on port ${port}`)})
+
+//Initializing the express app
 app.set('view engine', 'ejs')
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended:true}));
 
+
+//Handles default GET request with no variable
 app.get('/', (request, response) => {
     response.render('index');
 })
 
+//Handles POST request when submit button has been pressed
 app.post('/', (request, response) => {
-    console.log(process.env)
     const data = {
         prompt: request.body.input,
         temperature: 0.5,
@@ -32,6 +35,7 @@ app.post('/', (request, response) => {
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
     };
+    //Fetching response from OpenAI
     fetch("https://api.openai.com/v1/engines/"+request.body.engine+"/completions", {
         method: "POST",
         headers: {
@@ -39,6 +43,7 @@ app.post('/', (request, response) => {
             Authorization: `Bearer ${API_KEY}`,
         },
         body: JSON.stringify(data),
+    //Handling response from OpenAI
     }).then(res => res.json()).then(json => {
         console.log(json)
         let output = json['choices'][0]['text']
@@ -46,7 +51,5 @@ app.post('/', (request, response) => {
         let answerJSON = {'engine':request.body.engine,'prompt':request.body.input, 'response':result}
         response.render('index', {answerJSON: answerJSON});
     });
-    // let answerJSON = {'prompt':request.body.input, 'response':"Result example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example...Result Example..." }
-    // response.render('index', {answerJSON: answerJSON});
 });
 
