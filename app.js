@@ -6,7 +6,7 @@ import { createRequire } from 'module'
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const port = 8080
+const port = process.env.PORT || 5000
 const express = require('express')
 const app = express()
 const API_KEY = process.env.OPENAI_SECRET
@@ -45,7 +45,6 @@ app.post('/', (request, response) => {
         body: JSON.stringify(data),
     //Handling response from OpenAI
     }).then(res => res.json()).then(json => {
-        console.log(json)
         let output = json['choices'][0]['text']
         let result = output.replaceAll(/^[,\r\n]/gm, ' ')
         let answerJSON = {'engine':request.body.engine,'prompt':request.body.input, 'response':result}

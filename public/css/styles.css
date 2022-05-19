@@ -3,13 +3,7 @@
     font-family: 'Calibri', sans-serif;
 }
 :root{
-    --main-bg-color: rgb(227, 236, 253);
-    --main-bg-color2: rgb(240, 241, 243);
-    --color-1: #134074;
-    --color-2: #13315C;
-    --color-3: #0B2545;
-    --color-4: #8DA9C4;
-    --color-5: #EEF4ED;
+    --accent-color: #fffcf8;
 }
 body{
     margin: 0;
@@ -27,7 +21,6 @@ body{
 .container{
     height: 100vh;
     padding: 2rem 4vw;
-
 }
 .content{
     height: fit-content;
@@ -43,12 +36,12 @@ select{
     font-size: 1.2rem;
     padding: 0.2rem 0.4rem;
     border-radius: 6px;
-    background-color: rgba(228, 240, 255, 0.24);
+    background-color: var(--accent-color);
     width: min-content;
     outline: none;
 }
 option{
-    background-color: rgba(170, 207, 255, 0.2);
+    background-color: var(--accent-color);
 }
 label, #submit-button{
     display: block;
@@ -61,7 +54,7 @@ textarea{
     padding: 10px;
     border-radius: 8px;
     border-color: transparent;
-    background-color: #fffcf8;
+    background-color: var(--accent-color);
     box-shadow: rgba(87, 87, 87, 0.22) 0 0 10px 1px;
     font-size: 1.2rem;
     resize: none;
@@ -89,13 +82,13 @@ textarea{
 }
 #submit-button:hover:enabled{
     bottom: 8px;
-    background-color: rgb(83, 178, 255);
-    border: #3da4dc 2px solid;
+    background-color: rgb(45, 146, 215);
+    border: #2387b2 2px solid;
     box-shadow: gray 0 10px 14px -10px, inset rgba(51, 51, 51, 0.17) 0 0 10px 4px;
 }
 #submit-button:active:enabled {
     bottom: 8px;
-    background-color: rgb(90, 163, 192);
+    background-color: rgb(65, 152, 185);
     box-shadow: none;
     border-color: transparent;
 }
@@ -144,7 +137,7 @@ textarea{
     gap: .6rem;
     padding: 1rem;
     border-radius: 6px;
-    background-color: var(--main-bg-color);
+    background-color: var(--accent-color);
     box-shadow: rgba(162, 162, 162, 0.27) 0 0 4px 1px;
 }
 .response-text, .response-header{

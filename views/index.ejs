@@ -19,8 +19,8 @@
                 <option value="text-babbage-001">text-babbage-001</option>
             </select>
             <label for="user-prompt">Enter Prompt</label>
-            <textarea name="input" id="user-prompt" cols="30" rows="10"></textarea>
-            <input id="submit-button" type="submit" value="Submit!" name="submit">
+            <textarea name="input" onkeydown="" id="user-prompt" cols="30" rows="10"></textarea>
+            <input id="submit-button" type="submit" value="Submit!" name="submit-btn">
         </form>
         <h2 id="list-header">Responses</h2>
     <!--   Checks if a new response has been sent from the server-->
@@ -63,6 +63,10 @@
 <script>
     const textarea = document.getElementById("user-prompt");
     const btn = document.getElementById("submit-button");
+    const form  = document.getElementsByTagName('form')[0];
+
+    //Adds event listener for key pressed
+    textarea.addEventListener('keydown', submitForm)
 
     //Disables button when text area is empty
     document.getElementById('clear-button').disabled = window.localStorage.length === 0;
@@ -88,6 +92,14 @@
     //Avoids sending POST request on refresh
     if(window.history.replaceState){
         window.history.replaceState(null, null, window.location.href);
+    }
+
+    //Submits form when ENTER key is pressed
+    function submitForm(e){
+        if(e.key === 'Enter'){
+            e.preventDefault()
+            form.submit()
+        }
     }
 
 </script>
