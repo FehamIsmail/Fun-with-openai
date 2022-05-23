@@ -17,4 +17,7 @@ Fun with OpenAI will send a POST HTTP request containing the user's prompt as we
 containing different information namely, the response to the user's prompt. Then, the response will be stored in the user's local storage, which will be printed into
 the HTML.
 
+<h4>API Key</h4>
+If you wish to use your own API Key, it is recommanded to change it in the .env_sample file. Once this is done, make sure to rename the file to .env.
+
 <span>API Key expires the August 9<sup>th</sup>, 2022</span>
